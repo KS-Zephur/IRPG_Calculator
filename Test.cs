@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace IRPG_Calculator
 {
-    class Program
+    class Test
     {
         static void MainScript(string[] args)
         {
