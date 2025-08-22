@@ -863,14 +863,5 @@ namespace IRPG_Calculator
                 }
             }
         }
-
-        static void Main(string[] args)
-        {
-            //MainScript(args);
-            TestScript2(args);
-            //GraphScript1(args);
-            //Longinus1DropScript(args);
-
-        }
     }
 }
