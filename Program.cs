@@ -2,6 +2,12 @@ namespace IRPG_Calculator
 {
     class Program
     {
+        static void SeparateSection()
+        {
+            string separation = "====================================================";
+            Console.WriteLine(separation);
+        }
+
         static void Startup()
         {
             // Startup Message
@@ -28,19 +34,23 @@ namespace IRPG_Calculator
             string response;
             int choice;
 
-            int[] validChoices = { 0, 1, 2, 3, 4 };
+            int[] validChoices = { 0, 1, 2, 3, 4, 5, 6, 7 };
 
             while (true)
             {
                 // Display Options
-                Console.WriteLine("\nWhat would you like to do?");
+                Console.WriteLine("\n[Main Menu]\n");
+                Console.WriteLine("What would you like to do?");
                 Console.WriteLine("  (1) Set Stats");
-                Console.WriteLine("  (2) Optimize AGI");
-                Console.WriteLine("  (3) Simulate Battle");
-                Console.WriteLine("  (4) Estimate Revival Win Rate");
+                Console.WriteLine("  (2) Set Gear");
+                Console.WriteLine("  (3) Set Items");
+                Console.WriteLine("  (4) Optimize AGI to Boss");
+                Console.WriteLine("  (5) Simulate Boss Battle");
+                Console.WriteLine("  (6) Estimate Boss Revival Battle Win Rate");
+                Console.WriteLine("  (7) More Info about Calculator");
                 Console.WriteLine("  (0) Exit");
 
-                Console.WriteLine("\nSelect your option (0-4):");
+                Console.WriteLine($"\nSelect your option (0-{validChoices.Length - 1}):");
                 Console.Write("> ");
 
                 // Get response
@@ -61,7 +71,7 @@ namespace IRPG_Calculator
 
                 // Will run if invalid input is given
                 Console.WriteLine("\nInvalid option!");
-                Console.WriteLine("===============================");
+                SeparateSection();
             }
 
             return choice;
@@ -85,11 +95,41 @@ namespace IRPG_Calculator
                 switch (funcID)
                 {
                     case 0:
+                        // Exit Program
                         exitProgram = true;
+                        break;
+                    case 1:
+                        // Set stats
+                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        break;
+                    case 2:
+                        // Set gear
+                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        break;
+                    case 3:
+                        // Set items
+                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        break;
+                    case 4:
+                        // Optimize AGI
+                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        break;
+                    case 5:
+                        // Simulate Boss Battles
+                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        break;
+                    case 6:
+                        // Estimate Revival
+                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        break;
+                    case 7:
+                        // More Info about Calculator
+                        Console.WriteLine("(Currently not implemented, swry uwu)");
                         break;
                     default:
                         break;
                 }
+                SeparateSection();
             }
 
         }
