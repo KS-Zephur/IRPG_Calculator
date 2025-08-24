@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using MathNet.Numerics;
 
 namespace IRPG_Calculator

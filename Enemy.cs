@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace IRPG_Calculator
+﻿namespace IRPG_Calculator
 {
     internal class Enemy
     {

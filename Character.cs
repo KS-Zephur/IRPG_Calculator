@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Numerics;
-
-namespace IRPG_Calculator
+﻿namespace IRPG_Calculator
 {
 
 
