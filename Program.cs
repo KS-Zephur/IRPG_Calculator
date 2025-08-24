@@ -43,14 +43,13 @@ namespace IRPG_Calculator
             Character player = new Character();
 
             // Run startup sequence
-            Startup();
+            Program.Startup();
 
             // Breaks when funcID = 0
             while (!exitProgram)
             {
                 // Get selection
                 funcID = MainMenu.Run();
-                if (funcID > 0) SeparateSection();
 
                 // Match selection to function/exit
                 switch (funcID)
@@ -91,7 +90,7 @@ namespace IRPG_Calculator
                         Console.WriteLine("\nInvalid option!");
                         break;
                 }
-                SeparateSection();
+                Program.SeparateSection();
             }
 
         }
