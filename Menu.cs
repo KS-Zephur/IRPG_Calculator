@@ -37,7 +37,7 @@ namespace IRPG_Calculator
                 {
                     choice = -1;
                 }
-                else
+                else if (choice != 0)
                 {
                     Program.SeparateSection();
                 }
@@ -84,7 +84,7 @@ namespace IRPG_Calculator
                     {
                         choice = -1;
                     }
-                    else
+                    else if (choice != 0)
                     {
                         Program.SeparateSection();
                     }
@@ -95,7 +95,7 @@ namespace IRPG_Calculator
                 {
                     case 0:
                         exitSetStatsMenu = true;
-                        break;
+                        return;
                     case 1:
                         NewPlayerStats(player);
                         break;
