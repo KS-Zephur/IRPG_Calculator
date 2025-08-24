@@ -1,0 +1,3 @@
+# Include dir, but ignore all created files
+*
+!.gitignore
