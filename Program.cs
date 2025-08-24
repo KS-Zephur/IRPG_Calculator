@@ -2,12 +2,17 @@ using System.ComponentModel.Design;
 
 namespace IRPG_Calculator
 {
-    class Program
+    internal class Program
     {
-        static void SeparateSection()
+        public static void SeparateSection()
         {
             string separation = "\n====================================================\n";
             Console.WriteLine(separation);
+        }
+
+        public static void NotImplementedMessage()
+        {
+            Console.WriteLine("(Currently not implemented, swry uwu)");
         }
 
         static void Startup()
@@ -60,27 +65,27 @@ namespace IRPG_Calculator
                         break;
                     case 2:
                         // Set gear
-                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        Program.NotImplementedMessage();
                         break;
                     case 3:
                         // Set items
-                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        Program.NotImplementedMessage();
                         break;
                     case 4:
                         // Optimize AGI
-                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        Program.NotImplementedMessage();
                         break;
                     case 5:
                         // Simulate Boss Battles
-                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        Program.NotImplementedMessage();
                         break;
                     case 6:
                         // Estimate Revival
-                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        Program.NotImplementedMessage();
                         break;
                     case 7:
                         // More Info about Calculator
-                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        Program.NotImplementedMessage();
                         break;
                     default:
                         Console.WriteLine("\nInvalid option!");
