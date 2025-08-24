@@ -1,10 +1,12 @@
+using System.ComponentModel.Design;
+
 namespace IRPG_Calculator
 {
     class Program
     {
         static void SeparateSection()
         {
-            string separation = "====================================================";
+            string separation = "\n====================================================\n";
             Console.WriteLine(separation);
         }
 
@@ -26,61 +28,14 @@ namespace IRPG_Calculator
 
             Console.WriteLine(borderLine);
             Console.WriteLine(msgLine);
-            Console.WriteLine(borderLine);
-        }
-
-        static int MainMenu()
-        {
-            string response;
-            int choice;
-
-            int[] validChoices = { 0, 1, 2, 3, 4, 5, 6, 7 };
-
-            while (true)
-            {
-                // Display Options
-                Console.WriteLine("\n[Main Menu]\n");
-                Console.WriteLine("What would you like to do?");
-                Console.WriteLine("  (1) Set Stats");
-                Console.WriteLine("  (2) Set Gear");
-                Console.WriteLine("  (3) Set Items");
-                Console.WriteLine("  (4) Optimize AGI to Boss");
-                Console.WriteLine("  (5) Simulate Boss Battle");
-                Console.WriteLine("  (6) Estimate Boss Revival Battle Win Rate");
-                Console.WriteLine("  (7) More Info about Calculator");
-                Console.WriteLine("  (0) Exit");
-
-                Console.WriteLine($"\nSelect your option (0-{validChoices.Length - 1}):");
-                Console.Write("> ");
-
-                // Get response
-                response = Console.ReadLine();
-
-                try
-                {
-                    // Validate Input
-                    choice = Convert.ToInt32(response);
-
-                    // Break once option is selected
-                    if (validChoices.Contains(choice))
-                    {
-                        break;
-                    }
-                }
-                catch { }
-
-                // Will run if invalid input is given
-                Console.WriteLine("\nInvalid option!");
-                SeparateSection();
-            }
-
-            return choice;
+            Console.WriteLine(borderLine + "\n");
         }
 
         static void Main(string[] args)
         {
             int funcID;
             bool exitProgram = false;
+            Character player = new Character();
 
             // Run startup sequence
             Startup();
@@ -89,7 +44,8 @@ namespace IRPG_Calculator
             while (!exitProgram)
             {
                 // Get selection
-                funcID = MainMenu();
+                funcID = MainMenu.Run();
+                if (funcID > 0) SeparateSection();
 
                 // Match selection to function/exit
                 switch (funcID)
@@ -100,7 +56,7 @@ namespace IRPG_Calculator
                         break;
                     case 1:
                         // Set stats
-                        Console.WriteLine("(Currently not implemented, swry uwu)");
+                        SetStatsMenu.Run(player);
                         break;
                     case 2:
                         // Set gear
@@ -127,6 +83,7 @@ namespace IRPG_Calculator
                         Console.WriteLine("(Currently not implemented, swry uwu)");
                         break;
                     default:
+                        Console.WriteLine("\nInvalid option!");
                         break;
                 }
                 SeparateSection();
