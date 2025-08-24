@@ -113,7 +113,48 @@ namespace IRPG_Calculator
         public double AGIWARUI { get { return AGI / 2.0 / WARUI; } }
         public double LUCWARUI { get { return LUC / WARUI; } }
 
-        public Character(int level = 800000, string build = "", int characterAbilityLevel = 20)
+        public Character()
+        {
+            characterBuild = "";
+            runLevel = 1;
+            abilityLevel = 0;
+            characterLevel = 0;
+            kHp = 1;
+            kAtk = 2;
+            kDef = 0;
+            kAgi = 1;
+            kLuc = 0;
+            bonusHpPercent = 0.0;
+            bonusAtkPercent = 0.0;
+            bonusDefPercent = 0.0;
+            bonusAgiPercent = 0.0;
+            bonusLucPercent = 0.0;
+            weaponFlat = 5;
+            weaponPercent = 1.0;
+            weaponCopies = 1;
+            armourFlat = 5;
+            armourPercent = 1.0;
+            armourCopies = 1;
+            statHp = 100;
+            statAtk = 10;
+            statDef = 10;
+            statAgi = 5;
+            statLuc = 1;
+            recoveryNecklace = 0;
+            reviveNecklaces = 0;
+            firstCriticals = 0;
+            critDmgRings = 0;
+            critRateRings = 0;
+            comboRing = false;
+            FGG1 = 0;
+            PotH = 0;
+            HG = 0;
+            HG1 = 0;
+            HG2 = 0;
+            GOWG = 0;
+        }
+
+        public Character(int level, string build = "", int characterAbilityLevel = 20)
         {
             characterBuild = build;
             runLevel = level;
