@@ -94,16 +94,16 @@ namespace IRPG_Calculator
                 switch (choice)
                 {
                     case 0:
-                        NewPlayerStats(player);
+                        exitSetStatsMenu = true;
                         break;
                     case 1:
-                        SavePlayerStats(player);
+                        NewPlayerStats(player);
                         break;
                     case 2:
-                        LoadPlayerStats(player);
+                        SavePlayerStats(player);
                         break;
                     case 3:
-                        exitSetStatsMenu = true;
+                        LoadPlayerStats(player);
                         break;
                     default:
                         Console.WriteLine("\nInvalid option!");
