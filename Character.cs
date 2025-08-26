@@ -242,8 +242,8 @@
         {
             // HMK HH = 1.85
             double neededTotalDef = defMult * enemy.ATK / (halfAtkBonus ? 2 : 1);
-            int neededDef = (int)(neededTotalDef / DEFBONUS);
-            statDef = Math.Max(10, neededDef - EXTRABASEDEF);
+            int neededDef = 10 + 3 * (int)((neededTotalDef / DEFBONUS - EXTRABASEDEF - 10) / 3);
+            statDef = Math.Max(10, neededDef);
         }
 
         private void OptimizeHp(Enemy enemy, double hpMult = 3.75, bool halfAtkBonus = false)
@@ -252,15 +252,15 @@
             // HMK C&C = 5
             // HMK HH = 3.4
             double neededTotalHp = hpMult * enemy.AverageDamage(this, halfAtkBonus);
-            int neededHp = (int)(neededTotalHp / HPBONUS);
-            statHp = Math.Max(100, neededHp - EXTRABASEHP);
+            int neededHp = 100 + 5 * (int)((neededTotalHp / HPBONUS - EXTRABASEHP - 100) / 5);
+            statHp = Math.Max(100, neededHp);
         }
 
         private void OptimizeAtk(Enemy enemy, double atkMult = 2)
         {
             double neededTotalAtk = atkMult * enemy.POINT;
-            int neededAtk = (int)(neededTotalAtk / ATKBONUS);
-            statAtk = Math.Max(10, neededAtk - EXTRABASEATK);
+            int neededAtk = 10 + 3 * (int)((neededTotalAtk / ATKBONUS - EXTRABASEATK - 10) / 3);
+            statAtk = Math.Max(10, neededAtk);
         }
 
         public void OptimizeHpAtkDef(Enemy enemy, double wantedWinRate = 0.98, bool critComboBonus = false, bool halfHpBonus = false, bool halfAtkBonus = false, bool alterHP = true, bool alterATK = true, bool alterDEF = true, int nonStatGemLevels = 15000, int simulatedRuns = 10000)
