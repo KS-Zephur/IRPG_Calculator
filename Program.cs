@@ -1,9 +1,11 @@
-using System.ComponentModel.Design;
+using System.Reflection;
 
 namespace IRPG_Calculator
 {
     internal class Program
     {
+        internal static string DIRECTORY_PATH = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
         public static void SeparateSection()
         {
             string separation = "\n====================================================\n";
