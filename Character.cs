@@ -5,6 +5,13 @@ namespace IRPG_Calculator
 {
     internal class Character
     {
+        private static readonly JsonSerializerOptions JSONOPTIONS = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            IgnoreReadOnlyProperties = true,
+            IncludeFields = true,
+        };
+
         public static int MAXREVIVALSLOTS = 2;
         public static double LOWHPCRITICALBONUS = 0.05;
         public static double LOWHPCOMBOBONUS = 0.13;
@@ -1752,6 +1759,51 @@ namespace IRPG_Calculator
                     string statisticsText = new CritComboCalculator.SpecificCalculationVariables(statistics, scenario, slots).ToString();
                     Console.WriteLine(statisticsText);
                 }
+            }
+        }
+
+        public string ToJsonString()
+        {
+            string jsonString = JsonSerializer.Serialize(this, JSONOPTIONS);
+            return jsonString;
+        }
+
+        public int SaveJsonFile(string filename)
+        {
+            try
+            {
+                // Get Paths
+                string saveFolderPath = Program.DIRECTORY_FOLDERPATH_DICT["saves"];
+                string filepath = Path.Combine(saveFolderPath, $"{filename}.json");
+                // Write to File
+                File.WriteAllText(filepath, ToJsonString());
+                // Success
+                return 0;
+            }
+            catch (Exception e)
+            {
+                // Failed
+                return -1;
+            }
+        }
+
+        public static Character LoadJsonFile(string filename)
+        {
+            try
+            {
+                // Get Paths
+                string saveFolderPath = Program.DIRECTORY_FOLDERPATH_DICT["saves"];
+                string filepath = Path.Combine(saveFolderPath, $"{filename}.json");
+                // Load from File
+                string jsonString = File.ReadAllText(filepath);
+                Character loadedPlayer = JsonSerializer.Deserialize<Character>(jsonString, JSONOPTIONS)!;
+                // Success
+                return loadedPlayer;
+            }
+            catch (Exception e)
+            {
+                // Failed
+                return null;
             }
         }
 
