@@ -4,7 +4,28 @@ namespace IRPG_Calculator
 {
     internal class Program
     {
-        internal static string DIRECTORY_PATH = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        internal readonly static List<string> DIRECTORY_FOLDERS = new()
+        {
+            "saves",
+        };
+
+        internal readonly static string DIRECTORY_PATH = AppContext.BaseDirectory;
+
+        internal static IReadOnlyDictionary<string, string> DIRECTORY_FOLDERPATH_DICT
+        {
+            get
+            {
+                Dictionary<string, string> pathsDict = new();
+                foreach (string folder in DIRECTORY_FOLDERS)
+                {
+                    string folderPath = Path.Combine(DIRECTORY_PATH, folder);
+                    pathsDict.Add(folder, folderPath);
+                }
+                return pathsDict;
+            }
+        }
+
+        // ======================================================
 
         public static void SeparateSection()
         {
@@ -17,7 +38,7 @@ namespace IRPG_Calculator
             Console.WriteLine("(Currently not implemented, swry uwu)");
         }
 
-        static void Startup()
+        static void StartupMessage()
         {
             // Startup Message
             string msg = "Inflation RPG Calculator by KS-Zephur";
@@ -36,6 +57,16 @@ namespace IRPG_Calculator
             Console.WriteLine(borderLine);
             Console.WriteLine(msgLine);
             Console.WriteLine(borderLine + "\n");
+        }
+
+        static void Startup()
+        {
+            foreach (string folderPath in DIRECTORY_FOLDERPATH_DICT.Values)
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            StartupMessage();
         }
 
         static void Main(string[] args)
