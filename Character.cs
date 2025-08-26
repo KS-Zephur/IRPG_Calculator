@@ -1,7 +1,8 @@
-﻿namespace IRPG_Calculator
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace IRPG_Calculator
 {
-
-
     internal class Character
     {
         public static int MAXREVIVALSLOTS = 2;
@@ -33,6 +34,7 @@
         public double armourPercent;
         public int armourCopies;
 
+        [JsonInclude]
         public int statHp;
         public int statAtk;
         public int statDef;
@@ -90,8 +92,8 @@
         public double HPBONUS { get { return (1.0 + bonusHpPercent) * (1 + LEVELBONUS * 0.06 * kHp * (1 + 0.5 * PotH)); } }
         public double ATKBONUS { get { return (1.0 + bonusAtkPercent) * (weaponPercent + WEAPONPERCENTBONUS / 100.0 + LEVELBONUS * 0.07 * kAtk * (1 + 0.5 * PotH)); } }
         public double DEFBONUS { get { return (1.0 + bonusDefPercent) * (armourPercent + ARMOURPERCENTBONUS / 100.0 + LEVELBONUS * 0.07 * kDef * (1 + 0.5 * PotH)); } }
-        public double AGIBONUS {  get { return (1.0 + bonusAgiPercent) * (1.0 + LEVELBONUS * 0.075 * kAgi * (1.0 + 0.5 * PotH)); } }
-        public double LUCBONUS {  get { return (1.0 + bonusLucPercent) * (1.0 + LEVELBONUS * 0.08 * kLuc * (1.0 + 0.5 * PotH)); } }
+        public double AGIBONUS { get { return (1.0 + bonusAgiPercent) * (1.0 + LEVELBONUS * 0.075 * kAgi * (1.0 + 0.5 * PotH)); } }
+        public double LUCBONUS { get { return (1.0 + bonusLucPercent) * (1.0 + LEVELBONUS * 0.08 * kLuc * (1.0 + 0.5 * PotH)); } }
 
         public int EXTRABASEHP { get { return (360000 * FGG1 + 30000 * HG + 60000 * HG1 + 120000 * HG2); } }
         public int EXTRABASEATK { get { return (weaponFlat + WEAPONFLATBONUS + 360000 * FGG1 + 30000 * HG + 60000 * HG1 + 120000 * HG2 + 50000 * GOWG); } }
@@ -111,43 +113,12 @@
 
         public Character()
         {
-            characterBuild = "";
-            runLevel = 1;
-            abilityLevel = 0;
-            characterLevel = 0;
-            kHp = 1;
-            kAtk = 2;
-            kDef = 0;
-            kAgi = 1;
-            kLuc = 0;
-            bonusHpPercent = 0.0;
-            bonusAtkPercent = 0.0;
-            bonusDefPercent = 0.0;
-            bonusAgiPercent = 0.0;
-            bonusLucPercent = 0.0;
-            weaponFlat = 5;
-            weaponPercent = 1.0;
-            weaponCopies = 1;
-            armourFlat = 5;
-            armourPercent = 1.0;
-            armourCopies = 1;
-            statHp = 100;
-            statAtk = 10;
-            statDef = 10;
-            statAgi = 5;
-            statLuc = 1;
-            recoveryNecklace = 0;
-            reviveNecklaces = 0;
-            firstCriticals = 0;
-            critDmgRings = 0;
-            critRateRings = 0;
-            comboRing = false;
-            FGG1 = 0;
-            PotH = 0;
-            HG = 0;
-            HG1 = 0;
-            HG2 = 0;
-            GOWG = 0;
+            InitializeCharacter();
+        }
+
+        public Character(Character character)
+        {
+            CopyCharacter(character);
         }
 
         public Character(int level, string build = "", int characterAbilityLevel = 20)
@@ -197,10 +168,51 @@
             ChangeBuild(restrictStatChanges: false);
         }
 
-        public Character(Character character)
+        public void InitializeCharacter()
+        {
+            characterBuild = "";
+            runLevel = 1;
+            abilityLevel = 0;
+            characterLevel = 0;
+            kHp = 1;
+            kAtk = 2;
+            kDef = 0;
+            kAgi = 1;
+            kLuc = 0;
+            bonusHpPercent = 0.0;
+            bonusAtkPercent = 0.0;
+            bonusDefPercent = 0.0;
+            bonusAgiPercent = 0.0;
+            bonusLucPercent = 0.0;
+            weaponFlat = 5;
+            weaponPercent = 1.0;
+            weaponCopies = 1;
+            armourFlat = 5;
+            armourPercent = 1.0;
+            armourCopies = 1;
+            statHp = 100;
+            statAtk = 10;
+            statDef = 10;
+            statAgi = 5;
+            statLuc = 1;
+            recoveryNecklace = 0;
+            reviveNecklaces = 0;
+            firstCriticals = 0;
+            critDmgRings = 0;
+            critRateRings = 0;
+            comboRing = false;
+            FGG1 = 0;
+            PotH = 0;
+            HG = 0;
+            HG1 = 0;
+            HG2 = 0;
+            GOWG = 0;
+        }
+
+        public void CopyCharacter(Character character)
         {
             characterBuild = character.characterBuild;
-            runLevel= character.runLevel;
+            runLevel = character.runLevel;
             abilityLevel = character.abilityLevel;
             characterLevel = character.characterLevel;
             kHp = character.kHp;
@@ -269,7 +281,7 @@
             int originalDef = statDef;
             int originalHp = statHp;
             int originalAtk = statAtk;
-            
+
             int bestLevel = -1;
             int bestDefMult = 400;
             int bestHpMult = 375;
@@ -491,7 +503,7 @@
             int neededStattedAgi = (int)Math.Ceiling((1500000 / AGIBONUS - EXTRABASEAGI - 5) / 2.0);
             int usedAgiStatPoints = neededStattedAgi - stattedAgi;
             statAgi = 5 + 2 * neededStattedAgi;
-            
+
             int remainingStatPoints = statPoints - usedAgiStatPoints;
             int stattedLuc = 0;
 
@@ -1268,7 +1280,7 @@
             double critMult = AverageTrueCriticalMultiplier(enemy, critComboBonus);
             double critMultLow = AverageTrueCriticalMultiplierLow(enemy, critComboBonus);
 
-            double estimatedAttempts = turns / (1 -  comboRate);
+            double estimatedAttempts = turns / (1 - comboRate);
             double lowTurnPercentage = (turns - 1) / estimatedAttempts;
 
             double regCritFactor = (1.0 - lowTurnPercentage) * (1.0 + critRate * (critMult - 1.0));
@@ -1442,7 +1454,7 @@
 
             Character tester1 = new Character(this);
 
-            tester1.ChangeBuild(enemy: Gabriel, statPoints: statPoints, restrictStatChanges: restrictStatChanges, crit:0.16, combo:0.21);
+            tester1.ChangeBuild(enemy: Gabriel, statPoints: statPoints, restrictStatChanges: restrictStatChanges, crit: 0.16, combo: 0.21);
             double[][] gabrielWinRates = tester1.RevivalWinRates(Gabriel);
 
             tester1.characterBuild = twilight_buildName;
@@ -1735,7 +1747,7 @@
 
             for (int scenario = 0; scenario < SCENARIOS; scenario++)
             {
-                for( int slots = MAXREVIVALSLOTS; slots >= 0; slots--)
+                for (int slots = MAXREVIVALSLOTS; slots >= 0; slots--)
                 {
                     string statisticsText = new CritComboCalculator.SpecificCalculationVariables(statistics, scenario, slots).ToString();
                     Console.WriteLine(statisticsText);
